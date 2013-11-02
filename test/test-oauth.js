@@ -5,7 +5,7 @@ var Twitter = require('../index'),
 describe('Twitter.OAuth Functions:', function() {
   describe('OAuth loading', function() {
     it('should create the Object', function() {
-      var oauth = new Twitter.oauth(config);
+      var oauth = new Twitter.OAuth(config);
 
       oauth.should.be.an.instanceOf(Object);
     });
@@ -13,7 +13,7 @@ describe('Twitter.OAuth Functions:', function() {
 
   describe('OAuth.proto.requestToken():', function() {
     it('should request a token', function(done) {
-      var oauth = new Twitter.oauth(config);
+      var oauth = new Twitter.OAuth(config);
 
       oauth.requestToken(function(err, response) {
         should.not.exist(err);
@@ -36,7 +36,7 @@ describe('Twitter.OAuth Functions:', function() {
 
   describe('OAuth.proto.authenticate():', function() {
     it('should get an authenticate URL', function(done) {
-      var oauth = new Twitter.oauth(config);
+      var oauth = new Twitter.OAuth(config);
 
       oauth.authenticate({token: config.access_token}, function(err, response) {
         should.not.exist(err);
@@ -52,7 +52,7 @@ describe('Twitter.OAuth Functions:', function() {
 
   describe('OAuth.proto.authorize():', function() {
     it('should get an authorize URL', function(done) {
-      var oauth = new Twitter.oauth(config);
+      var oauth = new Twitter.OAuth(config);
 
       oauth.authorize({token: config.access_token}, function(err, response) {
         should.not.exist(err);
