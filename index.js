@@ -15,12 +15,9 @@ var API = require('./lib/api'),
  *  consumer_secret       - [Required]
  *  access_token_key      - [Optional]
  *  access_token_secret   - [Optional, but required if `access_token_key` was given]
+ *  callback              - [Optional]
  *
  *  The main will export all the functions implemented.
- *
- *  At the moment they are:
- *  - api
- *  - oauth
  **/
 module.exports = function(opts) {
   return {
@@ -36,14 +33,3 @@ module.exports.oauth = function(opts) {
 module.exports.api = function(opts) {
   return new API(uri, opts);
 };
-
-/*
-module.exports.timelines = function(opts) {
-};
-
-module.exports.tweets = function(opts) {
-};
-
-module.exports.search = function(opts) {
-};
-*/
