@@ -15,7 +15,7 @@ describe('Twitter.API Functions:', function() {
     it('should request an user timeline', function(done) {
       var api = new Twitter.API(config);
 
-      api.get('/statuses/user_timeline.json', {screen_name: 'ghostbar'}, function(err, response) {
+      api.get('/statuses/user_timeline.json', {screen_name: 'ghostbar', count: 1}, function(err, response) {
         should.not.exist(err);
 
         should.exist(response);
