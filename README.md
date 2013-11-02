@@ -48,6 +48,10 @@ keys['access_token_secret'] = '...';
 // Just Twitter's basic GET/POST interface
 ttapi = new Twitter.API(keys);
 
+ttapi.get('/statuses/mentions_timeline.json', params, function(err, response) {
+  ...
+});
+
 ```
 
 License and author
