@@ -21,15 +21,15 @@ var API = require('./lib/api'),
  **/
 module.exports = function(opts) {
   return {
-    api: new API(uri, opts),
-    oauth: new OAuth(uri, opts)
+    API: new API(uri, opts),
+    OAuth: new OAuth(uri, opts)
   }
 };
 
-module.exports.oauth = function(opts) {
+module.exports.OAuth = function(opts) {
   return new OAuth(uri, opts);
 };
 
-module.exports.api = function(opts) {
+module.exports.API = function(opts) {
   return new API(uri, opts);
 };
