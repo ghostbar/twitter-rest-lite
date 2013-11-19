@@ -22,7 +22,8 @@
   },
   "devDependencies": {
     "mocha": "~1.13.0",
-    "should": "~2.0.2"
+    "should": "~2.0.2",
+    "express": "~3.4.4"
   },
   "engines": {
     "node": ">=0.10.21"
