@@ -38,12 +38,12 @@ describe('Twitter.OAuth Functions:', function() {
     it('should get an authenticate URL', function(done) {
       var oauth = new Twitter.OAuth(config);
 
-      oauth.authenticate({token: config.access_token}, function(err, response) {
+      oauth.authenticate(config.token, function(err, response) {
         should.not.exist(err);
 
         should.exist(response);
 
-        response.should.equal("https://api.twitter.com/oauth/authenticate?oauth_token=" + config.access_token);
+        response.should.equal("https://api.twitter.com/oauth/authenticate?oauth_token=" + config.token);
 
         done();
       });
@@ -54,12 +54,12 @@ describe('Twitter.OAuth Functions:', function() {
     it('should get an authorize URL', function(done) {
       var oauth = new Twitter.OAuth(config);
 
-      oauth.authorize({token: config.access_token}, function(err, response) {
+      oauth.authorize(config.token, function(err, response) {
         should.not.exist(err);
 
         should.exist(response);
 
-        response.should.equal("https://api.twitter.com/oauth/authorize?oauth_token=" + config.access_token);
+        response.should.equal("https://api.twitter.com/oauth/authorize?oauth_token=" + config.token);
 
         done();
       });
