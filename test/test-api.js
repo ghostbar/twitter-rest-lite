@@ -26,8 +26,18 @@ describe('Twitter.API Functions:', function() {
   });
 
   describe('API.post()', function() {
-    it('should be implemented, not yet', function() {
-      console.log('TODO: TO BE IMPLEMENTED!');
+    it('should send a new tweet', function(done) {
+      this.timeout(40000);
+
+      var api = new Twitter.API(config);
+
+      api.post('/statuses/update.json', {status: "This is a test 123."}, function(err, response) {
+        should.not.exist(err);
+
+        should.exist(response);
+
+        done();
+      });
     });
   });
 });
