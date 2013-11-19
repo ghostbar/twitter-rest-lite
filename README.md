@@ -12,20 +12,20 @@ In order to get testing done, first create the file `test/config.json` with the 
 {
   "consumer_key": "Your credential from Twitter's Developer Interface",
   "consumer_secret": "Your credential from Twitter's Developer Interface",
-  "access_token": "Your credential from Twitter's Developer Interface",
-  "access_token_secret": "Your credential from Twitter's Developer Interface",
-  "callback": "oob"
+  "token": "Your credential from Twitter's Developer Interface",
+  "token_secret": "Your credential from Twitter's Developer Interface",
+  "callback": "Either your callback or `oob` if is a desktop app"
 }
 ```
 
 Now run:
 
-    make test
+    npm test
 
 Known Issues
 ------------
 
-- There's no testing for `api.proto.post()` and `oauth.proto.accessToken()`.
+- There's no testing unit for `OAuth.proto.accessToken` but the example uses it.
 
 Using
 -----
