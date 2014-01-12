@@ -15,6 +15,6 @@ clean-docs:
 	rm -rf docs/
 
 docs: clean-docs
-	docco --layout linear {index.js,lib/*.js}
+	docco --layout parallel {index.js,lib/*.js}
 
 .PHONY: test
