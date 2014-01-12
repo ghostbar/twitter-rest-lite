@@ -109,6 +109,13 @@ library itself)</li>
         
           <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">API</span><span class="hljs-params">(uri, opts)</span> {</span>
     <span class="hljs-keyword">this</span>.uri = uri;
+
+    <span class="hljs-comment">/* checking the required arguments */</span>
+    [<span class="hljs-string">'consumer_key'</span>, <span class="hljs-string">'consumer_secret'</span>, <span class="hljs-string">'token'</span>, <span class="hljs-string">'token_secret'</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item, index)</span> {</span>
+      <span class="hljs-keyword">if</span> (opts[item] == <span class="hljs-literal">null</span>)
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"There's a required argument missing: "</span> + item);
+    });
+
     <span class="hljs-keyword">this</span>.opts = opts;
 
     <span class="hljs-comment">/* bindings */</span>
