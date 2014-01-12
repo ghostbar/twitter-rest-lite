@@ -8,14 +8,8 @@
 //
 
 var API = require('./lib/api'),
-    OAuth = require('./lib/oauth'),
-    uri;
-
-/* Base URIs for Twitter API (These should be overwritten if to be used with a compatible API) */
-uri = {
-  base: 'https://api.twitter.com/1.1',
-  search: 'https://api.twitter.com/1.1/search'
-};
+OAuth = require('./lib/oauth'),
+uri;
 
 //
 // Quick Usage
@@ -58,6 +52,17 @@ uri = {
 // + **callback**: (Optional) If your app is a desktop app write `oob` 
 // (Out-Of-Band); if not then you should write your callback URL here 
 // (which will rewrite the one configured on Twitter's developer dashboard.
+// 
+
+//
+// Base URIs for Twitter API (These should be overwritten if to be used 
+// with a compatible API)
+//
+uri = {
+  base: 'https://api.twitter.com/1.1',
+  search: 'https://api.twitter.com/1.1/search'
+};
+
 //
 // Usage
 // -----
