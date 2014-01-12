@@ -9,4 +9,12 @@ test:
 		$(MOCHA_OPTS) \
 		test/test-*.js
 
+clean: clean-docs
+
+clean-docs:
+	rm -rf docs/
+
+docs:
+	docco --layout linear {index.js,*/*.js}
+
 .PHONY: test
