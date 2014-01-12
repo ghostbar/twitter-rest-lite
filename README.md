@@ -46,8 +46,9 @@ tt = new Twitter(keys);
 // Just Twitter's OAuth REST interface
 ttoauth = new Twitter.OAuth(keys);
 
-keys['access_token'] = '...';
-keys['access_token_secret'] = '...';
+// Using API module required `token` and `token_secret` on `keys`.
+keys['token'] = '...';
+keys['token_secret'] = '...';
 
 // Just Twitter's basic GET/POST interface
 ttapi = new Twitter.API(keys);
