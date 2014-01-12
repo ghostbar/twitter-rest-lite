@@ -8,8 +8,8 @@
 //
 
 var API = require('./lib/api'),
-OAuth = require('./lib/oauth'),
-uri;
+    OAuth = require('./lib/oauth'),
+    uri;
 
 //
 // Quick Usage
@@ -83,6 +83,7 @@ uri = {
 // twitter.api.post( /* ... */ );
 // ```
 //
+// #### Code
 module.exports = function(opts) {
   return {
     API: new API(uri, opts),
@@ -111,6 +112,7 @@ module.exports = function(opts) {
 //
 // More on the [OAuth module](oauth.html) documentation.
 //
+// #### Code
 module.exports.OAuth = module.exports.oauth = function(opts) {
   return new OAuth(uri, opts);
 };
@@ -140,6 +142,7 @@ module.exports.OAuth = module.exports.oauth = function(opts) {
 //
 //  More on the [API module](api.html) documentation.
 //
+// #### Code
 module.exports.API = module.exports.api = function(opts) {
   return new API(uri, opts);
 };
