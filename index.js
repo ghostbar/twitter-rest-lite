@@ -9,25 +9,62 @@
 
 var API = require('./lib/api'),
     OAuth = require('./lib/oauth'),
-    uri = {
-      base: 'https://api.twitter.com/1.1',
-      search: 'https://api.twitter.com/1.1/search'
-    };
+    uri;
 
-/**
- *  Main
- *  ====
- *
- *  All the exported functions expect an Object with the params:
- *
- *  consumer_key          - [Required]
- *  consumer_secret       - [Required]
- *  access_token_key      - [Optional]
- *  access_token_secret   - [Optional, but required if `access_token_key` was given]
- *  callback              - [Optional]
- *
- *  The main will export all the functions implemented.
- **/
+/* Base URIs for Twitter API (These should be overwritten if to be used with a compatible API) */
+uri = {
+  base: 'https://api.twitter.com/1.1',
+  search: 'https://api.twitter.com/1.1/search'
+};
+
+//
+// Quick Usage
+// -----------
+//
+// ```
+// var TwitterLib = require('twitter-rest-list'),
+//     twitter = new TwitterLib({
+//       consumer_key: "blahblahblah",
+//       consumer_secret: "blahblahblah",
+//       callback: "randomurl"
+//     });
+//
+// twitter.api.get('/statuses/user_timeline.json', {
+//   screen_name: 'twitter',
+//   count: 1
+// }, function (err, response) {
+//   if (err) throw err;
+//
+//   console.log(response);
+// });
+// ```
+//
+// What's available on the initialized object?
+// -------------------------------------------
+//
+// Initializes two objects: `api` and `oauth`. You can initialize them
+// separated too (this is my preferred method).
+//
+// Parameters to initialize any of the exported Objects
+// ----------------------------------------------------
+//
+// All the exported functions expect an Object with the params:
+//
+// + **consumer_key**: (Required) consumer key given by Twitter
+// + **consumer_secret**: (Required) consumer secret given by Twitter
+// + **access_token_key**: (Optional) access_token key given by Twitter
+// + **access_token_secret**: (Required if `access_token_key` was given) 
+// given by Twitter
+// + **callback**: (Optional) If your app is a desktop app write `oob` 
+// (Out-Of-Band); if not then you should write your callback URL here 
+// (which will rewrite the one configured on Twitter's developer dashboard.
+//
+// Usage
+// -----
+//
+// ```
+// ```
+//
 module.exports = function(opts) {
   return {
     API: new API(uri, opts),
