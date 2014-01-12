@@ -20,6 +20,8 @@ var API = require('./lib/api'),
 //     twitter = new TwitterLib({
 //       consumer_key: "blahblahblah",
 //       consumer_secret: "blahblahblah",
+//       token: 'blah',
+//       token_secret: 'blah',
 //       callback: "randomurl"
 //     });
 //
@@ -32,6 +34,13 @@ var API = require('./lib/api'),
 //   console.log(response);
 // });
 // ```
+/// #### PLEASE BE WARNED
+//
+// Using the complete `require` is only recommended if `token` and 
+// `token_secret` already exists.
+//
+// Otherwise the API module will throw an Error since it does need those 
+// two variables to do any of the calls./
 //
 // What's available on the initialized object?
 // -------------------------------------------
@@ -69,7 +78,7 @@ uri = {
 //
 // ```
 // var TwitterLib = require('twitter-rest-lite'),
-//     keys = {consumer_key: '...', consumer_secret: '...', callback: '...'},
+//     keys = {consumer_key: '...', consumer_secret: '...', token: '...', token_secret: '...' callback: '...'},
 //     twitter = new TwitterLib(keys);
 //
 // /* twitter.oauth object */
@@ -82,6 +91,14 @@ uri = {
 // twitter.api.get( /* ... */ );
 // twitter.api.post( /* ... */ );
 // ```
+//
+// #### PLEASE BE WARNED
+//
+// Using the complete `require` is only recommended if `token` and 
+// `token_secret` already exists.
+//
+// Otherwise the API module will throw an Error since it does need those 
+// two variables to do any of the calls.
 //
 // #### Code
 module.exports = function(opts) {
