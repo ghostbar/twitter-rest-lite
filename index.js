@@ -44,12 +44,12 @@ uri;
 //
 // All the exported functions expect an Object with the params:
 //
-// + `consumer_key`: (Required) consumer key given by Twitter
-// + `consumer_secret`: (Required) consumer secret given by Twitter
-// + `token`: (Optional) access_token key given by Twitter
-// + `token_secret`: (Required if `access_token_key` was given) 
+// + `consumer_key` - (Required) consumer key given by Twitter
+// + `consumer_secret` - (Required) consumer secret given by Twitter
+// + `token` - (Optional) access_token key given by Twitter
+// + `token_secret` - (Required if `access_token_key` was given) 
 // given by Twitter
-// + `callback`: (Optional) If your app is a desktop app write `oob` 
+// + `callback` - (Optional) If your app is a desktop app write `oob` 
 // (Out-Of-Band); if not then you should write your callback URL here 
 // (which will rewrite the one configured on Twitter's developer dashboard.
 // 
