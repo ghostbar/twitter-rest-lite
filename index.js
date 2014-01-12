@@ -68,6 +68,19 @@ uri = {
 // -----
 //
 // ```
+// var TwitterLib = require('twitter-rest-lite'),
+//     keys = {consumer_key: '...', consumer_secret: '...', callback: '...'},
+//     twitter = new TwitterLib(keys);
+//
+// /* twitter.oauth object */
+// twitter.oauth.requestToken( /* ... */ );
+// twitter.oauth.accessToken( /* ... */ );
+// twitter.oauth.authenticate( /* ... */ );
+// twitter.oauth.authorize( /* ... */ );
+//
+// /* twitter.api object */
+// twitter.api.get( /* ... */ );
+// twitter.api.post( /* ... */ );
 // ```
 //
 module.exports = function(opts) {
