@@ -16,5 +16,13 @@ clean-docs:
 
 docs: clean-docs
 	docco --layout linear {index.js,lib/*.js}
+	git subtree split --prefix docs -b gh-pages
+
+publish-docs: docs
+	git subtree push --prefix docs github gh-pages
+
+publish:
+	git push github --all; git push github --tags; git push bitbucket --all; git push bitbucket --tags
+	npm publish
 
 .PHONY: test
