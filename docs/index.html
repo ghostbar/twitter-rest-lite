@@ -72,6 +72,8 @@ and basic <code>POST</code>/<code>GET</code> <a href="api.html">API</a> requests
     twitter = new TwitterLib({
       consumer_key: &quot;blahblahblah&quot;,
       consumer_secret: &quot;blahblahblah&quot;,
+      token: &#39;blah&#39;,
+      token_secret: &#39;blah&#39;,
       callback: &quot;randomurl&quot;
     });
 
@@ -83,7 +85,12 @@ twitter.api.get(&#39;/statuses/user_timeline.json&#39;, {
 
   console.log(response);
 });
-</code></pre><h2 id="what-s-available-on-the-initialized-object-">What&#39;s available on the initialized object?</h2>
+</code></pre><p>/ #### PLEASE BE WARNED</p>
+<p>Using the complete <code>require</code> is only recommended if <code>token</code> and 
+<code>token_secret</code> already exists.</p>
+<p>Otherwise the API module will throw an Error since it does need those 
+two variables to do any of the calls./</p>
+<h2 id="what-s-available-on-the-initialized-object-">What&#39;s available on the initialized object?</h2>
 
         
       
@@ -123,7 +130,7 @@ with a compatible API)</p>
       
         
         <pre><code>var TwitterLib = require(&#39;twitter-rest-lite&#39;),
-    keys = {consumer_key: &#39;...&#39;, consumer_secret: &#39;...&#39;, callback: &#39;...&#39;},
+    keys = {consumer_key: &#39;...&#39;, consumer_secret: &#39;...&#39;, token: &#39;...&#39;, token_secret: &#39;...&#39; callback: &#39;...&#39;},
     twitter = new TwitterLib(keys);
 
 /* twitter.oauth object */
@@ -135,7 +142,12 @@ twitter.oauth.authorize( /* ... */ );
 /* twitter.api object */
 twitter.api.get( /* ... */ );
 twitter.api.post( /* ... */ );
-</code></pre><h4 id="code">Code</h4>
+</code></pre><h4 id="please-be-warned">PLEASE BE WARNED</h4>
+<p>Using the complete <code>require</code> is only recommended if <code>token</code> and 
+<code>token_secret</code> already exists.</p>
+<p>Otherwise the API module will throw an Error since it does need those 
+two variables to do any of the calls.</p>
+<h4 id="code">Code</h4>
 
         
           <div class='highlight'><pre>module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> {</span>
