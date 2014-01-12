@@ -59,6 +59,12 @@ ttapi.get('/statuses/mentions_timeline.json', params, function(err, response) {
 
 ```
 
+Documentation
+-------------
+
+[http://ghostbar.github.io/twitter-rest-lite](http://ghostbar.github.io/twitter-rest-lite) and/or
+`docs/` and/or the code itself. It's the same documentation.
+
 License and author
 ------------------
 © 2013-2014, Jose Luis Rivas `<me@ghostbar.co>`. Licensed under the MIT terms. A copy of the license is on the file `LICENSE`.
