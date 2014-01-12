@@ -46,8 +46,8 @@ uri;
 //
 // + **consumer_key**: (Required) consumer key given by Twitter
 // + **consumer_secret**: (Required) consumer secret given by Twitter
-// + **access_token_key**: (Optional) access_token key given by Twitter
-// + **access_token_secret**: (Required if `access_token_key` was given) 
+// + **token**: (Optional) access_token key given by Twitter
+// + **token_secret**: (Required if `access_token_key` was given) 
 // given by Twitter
 // + **callback**: (Optional) If your app is a desktop app write `oob` 
 // (Out-Of-Band); if not then you should write your callback URL here 
