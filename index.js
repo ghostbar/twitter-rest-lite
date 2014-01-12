@@ -90,7 +90,28 @@ module.exports = function(opts) {
   }
 };
 
-module.exports.OAuth = function(opts) {
+// OAuth Quick Usage
+// -----------------
+// 
+// ```
+// var TwitterLib = require('twitter-rest-lite'),
+// toauth = new TwitterLib.OAuth({
+//   consumer_key: 'blah',
+//   consumer_secret: 'blah',
+//   callback: 'randomurl'
+// });
+//
+// toauth.requestToken(function (err, response) {
+//   if (err)
+//     throw err;
+//
+//   console.log(response);
+// });
+// ```
+//
+// More on the [OAuth module](oauth.html) documentation.
+//
+module.exports.OAuth = module.exports.oauth = function(opts) {
   return new OAuth(uri, opts);
 };
 
