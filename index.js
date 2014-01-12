@@ -1,3 +1,12 @@
+// twitter-rest-lite
+// =================
+//
+// A lightweight Twitter REST-API library with [OAuth](oauth.html)
+// and basic `POST`/`GET` [API](api.html) requests modules.
+//
+// For more convenient methods you should check [`twitter-rest`](https://github.com/ghostbar/twitter-rest).
+//
+
 var API = require('./lib/api'),
     OAuth = require('./lib/oauth'),
     uri = {
