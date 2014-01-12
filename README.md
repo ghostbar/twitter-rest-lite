@@ -60,4 +60,4 @@ ttapi.get('/statuses/mentions_timeline.json', params, function(err, response) {
 
 License and author
 ------------------
-© 2013, Jose Luis Rivas `<me@ghostbar.co>`. Licensed under the MIT terms. A copy of the license is on the file `LICENSE`.
+© 2013-2014, Jose Luis Rivas `<me@ghostbar.co>`. Licensed under the MIT terms. A copy of the license is on the file `LICENSE`.
