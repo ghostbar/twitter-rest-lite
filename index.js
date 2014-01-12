@@ -115,6 +115,31 @@ module.exports.OAuth = module.exports.oauth = function(opts) {
   return new OAuth(uri, opts);
 };
 
-module.exports.API = function(opts) {
+// API Quick Usage
+// ---------------
+//
+// ```
+// var TwitterLib = require('twitter-rest-lite'),
+// tapi = new TwitterLib.API({
+//   consumer_key: 'blah',
+//   consumer_secret: 'blah',
+//   token: 'blah',
+//   token_secret: 'blah',
+//   callback: 'randomurl'
+//  });
+//
+//  tapi.get('/statuses/user_timeline.json', {
+//    screen_name: 'twitter'
+//  }, function (err, response) {
+//    if (err)
+//      throw err;
+//
+//    console.log(response);
+//  });
+//  ```
+//
+//  More on the [API module](api.html) documentation.
+//
+module.exports.API = module.exports.api = function(opts) {
   return new API(uri, opts);
 };
