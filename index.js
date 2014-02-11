@@ -7,9 +7,8 @@
 // For more convenient methods you should check [`twitter-rest`](https://github.com/ghostbar/twitter-rest).
 //
 
-var API = require('./lib/api'),
-    OAuth = require('./lib/oauth'),
-    uri;
+var API = require('./lib/api');
+var OAuth = require('./lib/oauth');
 
 //
 // Quick Usage
@@ -67,7 +66,7 @@ var API = require('./lib/api'),
 // Base URIs for Twitter API (These should be overwritten if to be used 
 // with a compatible API)
 //
-uri = {
+var uri = {
   base: 'https://api.twitter.com/1.1',
   search: 'https://api.twitter.com/1.1/search'
 };
