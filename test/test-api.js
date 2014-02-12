@@ -1,6 +1,6 @@
-var Twitter = require('../index'),
-    config = require('./config.json'),
-    should = require('should');
+var Twitter = require('../index');
+var config = require('./config.json');
+var should = require('should');
 
 describe('Twitter.API Functions:', function() {
   describe('API loading', function() {
