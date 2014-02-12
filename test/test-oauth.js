@@ -1,6 +1,6 @@
-var Twitter = require('../index'),
-    config = require('./config.json'),
-    should = require('should');
+var Twitter = require('../index');
+var config = require('./config.json');
+var should = require('should');
 
 describe('Twitter.OAuth Functions:', function() {
   describe('OAuth loading', function() {
