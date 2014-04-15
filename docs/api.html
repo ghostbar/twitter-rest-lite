@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>Module: API</title>
+  <title>api.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -13,10 +13,7 @@
 
       <div class="header">
         
-          
-          <h1 id="module-api">Module: API</h1>
-
-          
+          <h1>api.js</h1>
         
 
         
@@ -52,7 +49,18 @@
 
       
         
-        <p>Abstraction for the basic <code>GET</code>/<code>POST</code> operations of Twitter&#39;s REST API.</p>
+        
+        
+          <div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;</pre></div>
+        
+      
+        
+        <h1 id="module-api">Module: API</h1>
+
+        
+      
+        
+        <p>Abstraction for the basic <code>GET</code>/<code>POST</code> operations of Twitter’s REST API.</p>
 <h2 id="methods">Methods</h2>
 
         
@@ -68,8 +76,8 @@
         
       
         
-        <pre><code>var TwitterLib = require(&#39;twitter-rest-lite&#39;),
-api = new TwitterLib.API(var_with_keys);
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-lite'</span>),
+api = <span class="hljs-keyword">new</span> TwitterLib.API(var_with_keys);
 
 api.get(url, params, callback);
 
@@ -77,8 +85,7 @@ api.post(url, data, callback);
 </code></pre><h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre><span class="hljs-keyword">var</span> API,
-    __bind = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn, me)</span>{</span> <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span> <span class="hljs-keyword">return</span> fn.apply(me, <span class="hljs-built_in">arguments</span>); }; };
+          <div class='highlight'><pre><span class="hljs-keyword">var</span> API;
 
 module.exports = API = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span></pre></div>
         
@@ -92,7 +99,7 @@ module.exports = API = (<span class="hljs-function"><span class="hljs-keyword">f
         
         <h4 id="parameters">Parameters</h4>
 <ul>
-<li><code>uri</code>           - base URI&#39;s to use (this should be provided by the
+<li><code>uri</code>           - base URI’s to use (this should be provided by the
 library itself)</li>
 <li><code>opts</code>          - <code>Object</code> with user-provided params<ul>
 <li><code>consumer_key</code> - required</li>
@@ -111,17 +118,13 @@ library itself)</li>
     <span class="hljs-keyword">this</span>.uri = uri;
 
     <span class="hljs-comment">/* checking the required arguments */</span>
-    [<span class="hljs-string">'consumer_key'</span>, <span class="hljs-string">'consumer_secret'</span>, <span class="hljs-string">'token'</span>, <span class="hljs-string">'token_secret'</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item, index)</span> {</span>
+    [<span class="hljs-string">'consumer_key'</span>, <span class="hljs-string">'consumer_secret'</span>, <span class="hljs-string">'token'</span>, <span class="hljs-string">'token_secret'</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> {</span>
       <span class="hljs-keyword">if</span> (opts[item] == <span class="hljs-literal">null</span>)
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"There's a required argument missing: "</span> + item);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'There\'s a required argument missing: '</span> + item);
     });
 
     <span class="hljs-keyword">this</span>.opts = opts;
-
-    <span class="hljs-comment">/* bindings */</span>
-    <span class="hljs-keyword">this</span>.get = __bind(<span class="hljs-keyword">this</span>.get, <span class="hljs-keyword">this</span>);
-    <span class="hljs-keyword">this</span>.post = __bind(<span class="hljs-keyword">this</span>.post, <span class="hljs-keyword">this</span>);
-  };</pre></div>
+  }</pre></div>
         
       
         
@@ -141,12 +144,12 @@ library itself)</li>
 <p>A <code>Callback</code> with two parameters. First is an <code>Error Object</code> and second
 the body of the response in an <code>Object</code>.</p>
 <h4 id="example">Example</h4>
-<pre><code class="lang-js">api.get(&#39;/statuses/user_timeline.json&#39;, {
-  screen_name: &#39;random&#39;,
-  count: 1
-}, function (err, response) {
-  if (err)
-    throw err;
+<pre><code class="lang-js">api.get(<span class="hljs-string">'/statuses/user_timeline.json'</span>, {
+  screen_name: <span class="hljs-string">'random'</span>,
+  count: <span class="hljs-number">1</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+  <span class="hljs-keyword">if</span> (err)
+    <span class="hljs-keyword">throw</span> err;
 
   console.log(response);
 });
@@ -155,8 +158,8 @@ the body of the response in an <code>Object</code>.</p>
 
         
           <div class='highlight'><pre>  API.prototype.get = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, params, callback)</span> {</span>
-    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>,
-        request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
+    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+    <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
 
     url = self.uri.base + url;
 
@@ -194,13 +197,13 @@ the body of the response in an <code>Object</code>.</p>
 </ul>
 <h4 id="returns">Returns</h4>
 <p>A <code>Callback</code> with two parameters: <code>Error Object</code> and <code>Object</code> with
-body response from Twitter&#39;s API server.</p>
+body response from Twitter’s API server.</p>
 <h4 id="example">Example</h4>
-<pre><code class="lang-js">api.post(&#39;/statuses/update.json&#39;, {
-  status: &quot;This is an update to twitter!&quot;
-}, function (err, response) {
-  if (err)
-    throw err;
+<pre><code class="lang-js">api.post(<span class="hljs-string">'/statuses/update.json'</span>, {
+  status: <span class="hljs-string">"This is an update to twitter!"</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+  <span class="hljs-keyword">if</span> (err)
+    <span class="hljs-keyword">throw</span> err;
 
   console.log(response);
 });
@@ -209,9 +212,9 @@ body response from Twitter&#39;s API server.</p>
 
         
           <div class='highlight'><pre>  API.prototype.post = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, data, callback)</span> {</span>
-    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>,
-        request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>),
-        body = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+    <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
+    <span class="hljs-keyword">var</span> body = <span class="hljs-literal">null</span>;
 
     url = self.uri.base + url;
 

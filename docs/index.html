@@ -57,9 +57,9 @@ and basic <code>POST</code>/<code>GET</code> <a href="api.html">API</a> requests
 <p>For more convenient methods you should check <a href="https://github.com/ghostbar/twitter-rest"><code>twitter-rest</code></a>.</p>
 
         
-          <div class='highlight'><pre><span class="hljs-keyword">var</span> API = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/api'</span>),
-    OAuth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/oauth'</span>),
-    uri;</pre></div>
+          <div class='highlight'><pre>
+<span class="hljs-keyword">var</span> API = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/api'</span>);
+<span class="hljs-keyword">var</span> OAuth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/oauth'</span>);</pre></div>
         
       
         
@@ -68,20 +68,20 @@ and basic <code>POST</code>/<code>GET</code> <a href="api.html">API</a> requests
         
       
         
-        <pre><code>var TwitterLib = require(&#39;twitter-rest-list&#39;),
-    twitter = new TwitterLib({
-      consumer_key: &quot;blahblahblah&quot;,
-      consumer_secret: &quot;blahblahblah&quot;,
-      token: &#39;blah&#39;,
-      token_secret: &#39;blah&#39;,
-      callback: &quot;randomurl&quot;
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-list'</span>),
+    twitter = <span class="hljs-keyword">new</span> TwitterLib({
+      consumer_key: <span class="hljs-string">"blahblahblah"</span>,
+      consumer_secret: <span class="hljs-string">"blahblahblah"</span>,
+      token: <span class="hljs-string">'blah'</span>,
+      token_secret: <span class="hljs-string">'blah'</span>,
+      callback: <span class="hljs-string">"randomurl"</span>
     });
 
-twitter.api.get(&#39;/statuses/user_timeline.json&#39;, {
-  screen_name: &#39;twitter&#39;,
-  count: 1
-}, function (err, response) {
-  if (err) throw err;
+twitter.api.get(<span class="hljs-string">'/statuses/user_timeline.json'</span>, {
+  screen_name: <span class="hljs-string">'twitter'</span>,
+  count: <span class="hljs-number">1</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
 
   console.log(response);
 });
@@ -90,7 +90,7 @@ twitter.api.get(&#39;/statuses/user_timeline.json&#39;, {
 <code>token_secret</code> already exists.</p>
 <p>Otherwise the API module will throw an Error since it does need those 
 two variables to do any of the calls./</p>
-<h2 id="what-s-available-on-the-initialized-object-">What&#39;s available on the initialized object?</h2>
+<h2 id="what-s-available-on-the-initialized-object-">What’s available on the initialized object?</h2>
 
         
       
@@ -111,13 +111,17 @@ separated too (this is my preferred method).</p>
 given by Twitter</li>
 <li><code>callback</code> - (Optional) If your app is a desktop app write <code>oob</code> 
 (Out-Of-Band); if not then you should write your callback URL here 
-(which will rewrite the one configured on Twitter&#39;s developer dashboard.</li>
+(which will rewrite the one configured on Twitter’s developer dashboard.</li>
 </ul>
-<p>Base URIs for Twitter API (These should be overwritten if to be used 
+
+        
+      
+        
+        <p>Base URIs for Twitter API (These should be overwritten if to be used 
 with a compatible API)</p>
 
         
-          <div class='highlight'><pre>uri = {
+          <div class='highlight'><pre><span class="hljs-keyword">var</span> uri = {
   base: <span class="hljs-string">'https://api.twitter.com/1.1'</span>,
   search: <span class="hljs-string">'https://api.twitter.com/1.1/search'</span>
 };</pre></div>
@@ -129,19 +133,19 @@ with a compatible API)</p>
         
       
         
-        <pre><code>var TwitterLib = require(&#39;twitter-rest-lite&#39;),
-    keys = {consumer_key: &#39;...&#39;, consumer_secret: &#39;...&#39;, token: &#39;...&#39;, token_secret: &#39;...&#39; callback: &#39;...&#39;},
-    twitter = new TwitterLib(keys);
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-lite'</span>),
+    keys = {consumer_key: <span class="hljs-string">'...'</span>, consumer_secret: <span class="hljs-string">'...'</span>, token: <span class="hljs-string">'...'</span>, token_secret: <span class="hljs-string">'...'</span> callback: <span class="hljs-string">'...'</span>},
+    twitter = <span class="hljs-keyword">new</span> TwitterLib(keys);
 
-/* twitter.oauth object */
-twitter.oauth.requestToken( /* ... */ );
-twitter.oauth.accessToken( /* ... */ );
-twitter.oauth.authenticate( /* ... */ );
-twitter.oauth.authorize( /* ... */ );
+<span class="hljs-comment">/* twitter.oauth object */</span>
+twitter.oauth.requestToken( <span class="hljs-comment">/* ... */</span> );
+twitter.oauth.accessToken( <span class="hljs-comment">/* ... */</span> );
+twitter.oauth.authenticate( <span class="hljs-comment">/* ... */</span> );
+twitter.oauth.authorize( <span class="hljs-comment">/* ... */</span> );
 
-/* twitter.api object */
-twitter.api.get( /* ... */ );
-twitter.api.post( /* ... */ );
+<span class="hljs-comment">/* twitter.api object */</span>
+twitter.api.get( <span class="hljs-comment">/* ... */</span> );
+twitter.api.post( <span class="hljs-comment">/* ... */</span> );
 </code></pre><h4 id="please-be-warned">PLEASE BE WARNED</h4>
 <p>Using the complete <code>require</code> is only recommended if <code>token</code> and 
 <code>token_secret</code> already exists.</p>
@@ -164,16 +168,16 @@ two variables to do any of the calls.</p>
         
       
         
-        <pre><code>var TwitterLib = require(&#39;twitter-rest-lite&#39;),
-toauth = new TwitterLib.OAuth({
-  consumer_key: &#39;blah&#39;,
-  consumer_secret: &#39;blah&#39;,
-  callback: &#39;randomurl&#39;
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-lite'</span>),
+toauth = <span class="hljs-keyword">new</span> TwitterLib.OAuth({
+  consumer_key: <span class="hljs-string">'blah'</span>,
+  consumer_secret: <span class="hljs-string">'blah'</span>,
+  callback: <span class="hljs-string">'randomurl'</span>
 });
 
-toauth.requestToken(function (err, response) {
-  if (err)
-    throw err;
+toauth.requestToken(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+  <span class="hljs-keyword">if</span> (err)
+    <span class="hljs-keyword">throw</span> err;
 
   console.log(response);
 });
@@ -192,20 +196,20 @@ toauth.requestToken(function (err, response) {
         
       
         
-        <pre><code>var TwitterLib = require(&#39;twitter-rest-lite&#39;),
-tapi = new TwitterLib.API({
-  consumer_key: &#39;blah&#39;,
-  consumer_secret: &#39;blah&#39;,
-  token: &#39;blah&#39;,
-  token_secret: &#39;blah&#39;,
-  callback: &#39;randomurl&#39;
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-lite'</span>),
+tapi = <span class="hljs-keyword">new</span> TwitterLib.API({
+  consumer_key: <span class="hljs-string">'blah'</span>,
+  consumer_secret: <span class="hljs-string">'blah'</span>,
+  token: <span class="hljs-string">'blah'</span>,
+  token_secret: <span class="hljs-string">'blah'</span>,
+  callback: <span class="hljs-string">'randomurl'</span>
  });
 
- tapi.get(&#39;/statuses/user_timeline.json&#39;, {
-   screen_name: &#39;twitter&#39;
- }, function (err, response) {
-   if (err)
-     throw err;
+ tapi.get(<span class="hljs-string">'/statuses/user_timeline.json'</span>, {
+   screen_name: <span class="hljs-string">'twitter'</span>
+ }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+   <span class="hljs-keyword">if</span> (err)
+     <span class="hljs-keyword">throw</span> err;
 
    console.log(response);
  });
