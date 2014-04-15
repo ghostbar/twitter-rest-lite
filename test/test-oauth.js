@@ -1,9 +1,15 @@
+/* global describe */
+/* global it */
+'use strict';
+
 var Twitter = require('../index');
-var config = require('./config.json');
+var optional = require('optional');
+var optConfig = {consumer_key: 'random', consumer_secret: 'random', token: 'random', token_secret: 'random'};
+var config = optional('./config.json') || optConfig;
 var should = require('should');
 
-describe('Twitter.OAuth Functions:', function() {
-  describe('OAuth loading', function() {
+describe('Twitter.OAuth Functions:', function () {
+  describe('OAuth loading', function () {
     it('should create the Object', function() {
       var oauth = new Twitter.OAuth(config);
 
@@ -11,55 +17,32 @@ describe('Twitter.OAuth Functions:', function() {
     });
   });
 
-  describe('OAuth.proto.requestToken():', function() {
-    it('should request a token', function(done) {
+  describe('OAuth.proto.authenticate():', function () {
+    it('should get an authenticate URL', function (done) {
       var oauth = new Twitter.OAuth(config);
 
-      oauth.requestToken(function(err, response) {
+      oauth.authenticate(config.token, function (err, response) {
         should.not.exist(err);
 
         should.exist(response);
 
-        response.should.be.an.instanceOf(Object);
+        response.should.equal('https://api.twitter.com/oauth/authenticate?oauth_token=' + config.token);
 
         done();
       });
     });
   });
 
-  describe('OAuth.proto.accessToken():', function() {
-    it('should request an access_token', function(done) {
-      console.log('\nTODO: NEEDS TO BE IMPLEMENTED!');
-      done();
-    });
-  });
-
-  describe('OAuth.proto.authenticate():', function() {
-    it('should get an authenticate URL', function(done) {
+  describe('OAuth.proto.authorize():', function () {
+    it('should get an authorize URL', function (done) {
       var oauth = new Twitter.OAuth(config);
 
-      oauth.authenticate(config.token, function(err, response) {
+      oauth.authorize(config.token, function (err, response) {
         should.not.exist(err);
 
         should.exist(response);
 
-        response.should.equal("https://api.twitter.com/oauth/authenticate?oauth_token=" + config.token);
-
-        done();
-      });
-    });
-  });
-
-  describe('OAuth.proto.authorize():', function() {
-    it('should get an authorize URL', function(done) {
-      var oauth = new Twitter.OAuth(config);
-
-      oauth.authorize(config.token, function(err, response) {
-        should.not.exist(err);
-
-        should.exist(response);
-
-        response.should.equal("https://api.twitter.com/oauth/authorize?oauth_token=" + config.token);
+        response.should.equal('https://api.twitter.com/oauth/authorize?oauth_token=' + config.token);
 
         done();
       });
