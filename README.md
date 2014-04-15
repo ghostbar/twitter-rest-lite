@@ -1,4 +1,4 @@
-twitter-rest-lite
+twitter-rest-lite [![Build Status](https://secure.travis-ci.org/ghostbar/twitter-rest-lite.png)](http://travis.ci.org/ghostbar/twitter-rest-lite)
 =================
 
 [![NPM](https://nodei.co/npm/twitter-rest-lite.png?stars&downloads)](https://nodei.co/npm/twitter-rest-lite/)
@@ -10,7 +10,7 @@ Yet another Twitter's API library for Node.js, yes.
 Testing
 -------
 
-In order to get testing done, first create the file `test/config.json` with the following format:
+In order to get full testing done (with `make test-all`), first create the file `test/config.json` with the following format:
 
 ```js
 {
@@ -24,7 +24,7 @@ In order to get testing done, first create the file `test/config.json` with the 
 
 Now run:
 
-    npm test
+    make test-all
 
 Known Issues
 ------------
