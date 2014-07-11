@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var docco = require('gulp-docco');
 var subtree = require('gulp-subtree');
-var clean = require('gulp-clean');
+var rimraf = require('gulp-rimraf');
 
 var exec = require('child_process').exec;
 
@@ -46,7 +46,7 @@ gulp.task('watch', function () {
 gulp.task('clean-docs', function () {
   return gulp
     .src('docs/', {read: false})
-    .pipe(clean());
+    .pipe(rimraf());
 });
 
 gulp.task('make-docs', function () {
@@ -65,7 +65,7 @@ gulp.task('publish-docs', function () {
       remote: 'github',
       message: 'Updating docs'
     }))
-    .pipe(clean());
+    .pipe(rimraf());
 });
 
 gulp.task('docs', ['clean-docs', 'make-docs', 'publish-docs']);
