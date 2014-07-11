@@ -20,34 +20,6 @@
         
 
         
-          <div class="toc">
-            <h3>Table of Contents</h3>
-            <ol>
-              
-                
-                <li>
-                  <a class="source" href="index.html">
-                    index.js
-                  </a>
-                </li>
-              
-                
-                <li>
-                  <a class="source" href="api.html">
-                    api.js
-                  </a>
-                </li>
-              
-                
-                <li>
-                  <a class="source" href="oauth.html">
-                    oauth.js
-                  </a>
-                </li>
-              
-            </ol>
-          </div>
-        
       </div>
 
       
@@ -80,10 +52,10 @@ and basic <code>POST</code>/<code>GET</code> <a href="api.html">API</a> requests
 twitter.api.get(<span class="hljs-string">'/statuses/user_timeline.json'</span>, {
   screen_name: <span class="hljs-string">'twitter'</span>,
   count: <span class="hljs-number">1</span>
-}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
   <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
 
-  console.log(response);
+  <span class="hljs-built_in">console</span>.log(response);
 });
 </code></pre><p>/ #### PLEASE BE WARNED</p>
 <p>Using the complete <code>require</code> is only recommended if <code>token</code> and 
@@ -154,7 +126,7 @@ two variables to do any of the calls.</p>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre>module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> {</span>
+          <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> </span>{
   <span class="hljs-keyword">return</span> {
     API: <span class="hljs-keyword">new</span> API(uri, opts),
     OAuth: <span class="hljs-keyword">new</span> OAuth(uri, opts)
@@ -175,17 +147,17 @@ toauth = <span class="hljs-keyword">new</span> TwitterLib.OAuth({
   callback: <span class="hljs-string">'randomurl'</span>
 });
 
-toauth.requestToken(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+toauth.requestToken(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
   <span class="hljs-keyword">if</span> (err)
     <span class="hljs-keyword">throw</span> err;
 
-  console.log(response);
+  <span class="hljs-built_in">console</span>.log(response);
 });
 </code></pre><p>More on the <a href="oauth.html">OAuth module</a> documentation.</p>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre>module.exports.OAuth = module.exports.oauth = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> {</span>
+          <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports.OAuth = <span class="hljs-built_in">module</span>.exports.oauth = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> OAuth(uri, opts);
 };</pre></div>
         
@@ -207,17 +179,17 @@ tapi = <span class="hljs-keyword">new</span> TwitterLib.API({
 
  tapi.get(<span class="hljs-string">'/statuses/user_timeline.json'</span>, {
    screen_name: <span class="hljs-string">'twitter'</span>
- }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+ }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
    <span class="hljs-keyword">if</span> (err)
      <span class="hljs-keyword">throw</span> err;
 
-   console.log(response);
+   <span class="hljs-built_in">console</span>.log(response);
  });
 </code></pre><p> More on the <a href="api.html">API module</a> documentation.</p>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre>module.exports.API = module.exports.api = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> {</span>
+          <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports.API = <span class="hljs-built_in">module</span>.exports.api = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> API(uri, opts);
 };</pre></div>
         

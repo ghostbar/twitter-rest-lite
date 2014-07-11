@@ -17,34 +17,6 @@
         
 
         
-          <div class="toc">
-            <h3>Table of Contents</h3>
-            <ol>
-              
-                
-                <li>
-                  <a class="source" href="index.html">
-                    index.js
-                  </a>
-                </li>
-              
-                
-                <li>
-                  <a class="source" href="api.html">
-                    api.js
-                  </a>
-                </li>
-              
-                
-                <li>
-                  <a class="source" href="oauth.html">
-                    oauth.js
-                  </a>
-                </li>
-              
-            </ol>
-          </div>
-        
       </div>
 
       
@@ -105,11 +77,11 @@ library itself)</li>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">API</span><span class="hljs-params">(uri, opts)</span> {</span>
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">API</span><span class="hljs-params">(uri, opts)</span> </span>{
   <span class="hljs-keyword">this</span>.uri = uri;
 
   <span class="hljs-comment">/* checking the required arguments */</span>
-  [<span class="hljs-string">'consumer_key'</span>, <span class="hljs-string">'consumer_secret'</span>, <span class="hljs-string">'token'</span>, <span class="hljs-string">'token_secret'</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> {</span>
+  [<span class="hljs-string">'consumer_key'</span>, <span class="hljs-string">'consumer_secret'</span>, <span class="hljs-string">'token'</span>, <span class="hljs-string">'token_secret'</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
     <span class="hljs-keyword">if</span> (opts[item] == <span class="hljs-literal">null</span>)
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'There\'s a required argument missing: '</span> + item);
   });
@@ -138,17 +110,17 @@ the body of the response in an <code>Object</code>.</p>
 <pre><code class="lang-js">api.get(<span class="hljs-string">'/statuses/user_timeline.json'</span>, {
   screen_name: <span class="hljs-string">'random'</span>,
   count: <span class="hljs-number">1</span>
-}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
   <span class="hljs-keyword">if</span> (err)
     <span class="hljs-keyword">throw</span> err;
 
-  console.log(response);
+  <span class="hljs-built_in">console</span>.log(response);
 });
 </code></pre>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre>API.prototype.get = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, params, callback)</span> {</span>
+          <div class='highlight'><pre>API.prototype.get = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, params, callback)</span> </span>{
   <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
   <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
 
@@ -164,7 +136,7 @@ the body of the response in an <code>Object</code>.</p>
     uri: url,
     oauth: self.opts,
     json: <span class="hljs-literal">true</span>,
-  }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> {</span>
+  }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> </span>{
     <span class="hljs-keyword">if</span> (err)
       <span class="hljs-keyword">return</span> callback(err);
 
@@ -192,17 +164,17 @@ body response from Twitter’s API server.</p>
 <h4 id="example">Example</h4>
 <pre><code class="lang-js">api.post(<span class="hljs-string">'/statuses/update.json'</span>, {
   status: <span class="hljs-string">"This is an update to twitter!"</span>
-}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
   <span class="hljs-keyword">if</span> (err)
     <span class="hljs-keyword">throw</span> err;
 
-  console.log(response);
+  <span class="hljs-built_in">console</span>.log(response);
 });
 </code></pre>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre>API.prototype.post = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, data, callback)</span> {</span>
+          <div class='highlight'><pre>API.prototype.post = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, data, callback)</span> </span>{
   <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
   <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
   <span class="hljs-keyword">var</span> body = <span class="hljs-literal">null</span>;
@@ -217,7 +189,7 @@ body response from Twitter’s API server.</p>
     uri: url,
     oauth: self.opts,
     form: data
-  }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> {</span>
+  }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> </span>{
     <span class="hljs-keyword">if</span> (err)
       <span class="hljs-keyword">return</span> callback(err);
 
@@ -225,7 +197,7 @@ body response from Twitter’s API server.</p>
   });
 };
 
-module.exports = API;</pre></div>
+<span class="hljs-built_in">module</span>.exports = API;</pre></div>
         
       
       <div class="fleur">h</div>

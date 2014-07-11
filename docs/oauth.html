@@ -17,34 +17,6 @@
         
 
         
-          <div class="toc">
-            <h3>Table of Contents</h3>
-            <ol>
-              
-                
-                <li>
-                  <a class="source" href="index.html">
-                    index.js
-                  </a>
-                </li>
-              
-                
-                <li>
-                  <a class="source" href="api.html">
-                    api.js
-                  </a>
-                </li>
-              
-                
-                <li>
-                  <a class="source" href="oauth.html">
-                    oauth.js
-                  </a>
-                </li>
-              
-            </ol>
-          </div>
-        
       </div>
 
       
@@ -113,7 +85,7 @@ and <code>authorize</code>.</p>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">OAuth</span><span class="hljs-params">(uri, opts)</span> {</span>
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">OAuth</span><span class="hljs-params">(uri, opts)</span> </span>{
   <span class="hljs-keyword">this</span>.uri = uri;
 
   <span class="hljs-comment">/* Extending `uri` with oauth URI's */</span>
@@ -123,7 +95,7 @@ and <code>authorize</code>.</p>
   <span class="hljs-keyword">this</span>.uri.authorize = <span class="hljs-string">'https://api.twitter.com/oauth/authorize'</span>;
 
   <span class="hljs-comment">/* checking the required arguments */</span>
-  [<span class="hljs-string">'consumer_key'</span>, <span class="hljs-string">'consumer_secret'</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> {</span>
+  [<span class="hljs-string">'consumer_key'</span>, <span class="hljs-string">'consumer_secret'</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
     <span class="hljs-keyword">if</span> (opts[item] == <span class="hljs-literal">null</span>)
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'There\'s a required argument missing: '</span> + item);
   });
@@ -153,11 +125,11 @@ and <code>authorize</code>.</p>
 }
 </code></pre>
 <h4 id="example">Example</h4>
-<pre><code class="lang-js">oauth.requestToken(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+<pre><code class="lang-js">oauth.requestToken(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
   <span class="hljs-keyword">if</span> (err)
     <span class="hljs-keyword">throw</span> err;
 
-  console.log(response);
+  <span class="hljs-built_in">console</span>.log(response);
 });
 </code></pre>
 <p><code>response.token</code> is used by <a href="#authenticate"><code>oauth.authenticate</code></a> and 
@@ -165,7 +137,7 @@ and <code>authorize</code>.</p>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre>OAuth.prototype.requestToken = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(callback)</span> {</span>
+          <div class='highlight'><pre>OAuth.prototype.requestToken = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(callback)</span> </span>{
   <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
   <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
   <span class="hljs-keyword">var</span> oauth = {
@@ -181,7 +153,7 @@ and <code>authorize</code>.</p>
     method: <span class="hljs-string">'POST'</span>,
     uri: self.uri.request_token,
     oauth: oauth
-  }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> {</span>
+  }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> </span>{
     <span class="hljs-keyword">if</span> (err)
       <span class="hljs-keyword">return</span> callback(err);
 
@@ -229,22 +201,22 @@ and <code>authorize</code>.</p>
 making the proper request to twitter’s servers you will end up with
 a <code>token</code> and a <code>verifier</code>. Suppose they are stored each in a variable
 of the same name, then:</p>
-<pre><code>oauth.accessToken(token, verifier, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+<pre><code>oauth.accessToken(token, verifier, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
   <span class="hljs-keyword">if</span> (err)
     <span class="hljs-keyword">throw</span> (err);
 
-  console.log(response);
+  <span class="hljs-built_in">console</span>.log(response);
 });
 </code></pre><p>With the data from that response you can initialize the API module and
 start <code>GET</code>‘ing and <code>POST</code>‘ing with <em>user context</em> as Twitter calls it.</p>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre>OAuth.prototype.accessToken = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(token, verifier, callback)</span> {</span>
+          <div class='highlight'><pre>OAuth.prototype.accessToken = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(token, verifier, callback)</span> </span>{
   <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
   <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
 
-  [token, verifier].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> {</span>
+  [token, verifier].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
     <span class="hljs-keyword">if</span> (item == <span class="hljs-literal">null</span>) {
       <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(
         <span class="hljs-string">'Twitter:OAuth.accessToken requires all the arguments to work.'</span>
@@ -263,7 +235,7 @@ start <code>GET</code>‘ing and <code>POST</code>‘ing with <em>user context</
     method: <span class="hljs-string">'POST'</span>,
     uri: self.uri.access_token,
     oauth: oauth
-  }, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, response, body)</span> {</span>
+  }, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, response, body)</span> </span>{
     <span class="hljs-keyword">if</span> (err)
       <span class="hljs-keyword">return</span> callback(err);
 
@@ -292,18 +264,18 @@ start <code>GET</code>‘ing and <code>POST</code>‘ing with <em>user context</
 <p>A <code>Callback</code> with an <code>Error</code> object as the first parameter and a <code>String</code> 
 with the URL to which redirect users as second parameter.</p>
 <h4 id="example">Example</h4>
-<pre><code class="lang-js">oauth.authenticate(token, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+<pre><code class="lang-js">oauth.authenticate(token, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
   <span class="hljs-keyword">if</span> (err)
     <span class="hljs-keyword">throw</span> err;
 
-  console.log(response);
+  <span class="hljs-built_in">console</span>.log(response);
   <span class="hljs-comment">/* https://api.twitter.com/oauth/authenticate?oauth_token= + token provided */</span>
 });
 </code></pre>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre>OAuth.prototype.authenticate = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(token, callback)</span> {</span>
+          <div class='highlight'><pre>OAuth.prototype.authenticate = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(token, callback)</span> </span>{
   <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
 
   <span class="hljs-keyword">if</span> ((token == <span class="hljs-literal">null</span>) || (<span class="hljs-keyword">typeof</span> token !== <span class="hljs-string">'string'</span>)) {
@@ -337,18 +309,18 @@ with the URL to which redirect users as second parameter.</p>
 <p>A <code>Callback</code> with an <code>Error</code> object as the first parameter and a <code>String</code>
 with the URL to which redirect users as second parameter.</p>
 <h4 id="example">Example</h4>
-<pre><code class="lang-js">oauth.authorize(token, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> {</span>
+<pre><code class="lang-js">oauth.authorize(token, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
   <span class="hljs-keyword">if</span> (err)
     <span class="hljs-keyword">throw</span> err;
 
-  console.log(response);
+  <span class="hljs-built_in">console</span>.log(response);
   <span class="hljs-comment">/* https://api.twitter.com/oauth/authorize?oauth_token= + token provided */</span>
 });
 </code></pre>
 <h4 id="code">Code</h4>
 
         
-          <div class='highlight'><pre>OAuth.prototype.authorize = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(token, callback)</span> {</span>
+          <div class='highlight'><pre>OAuth.prototype.authorize = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(token, callback)</span> </span>{
   <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
 
   <span class="hljs-keyword">if</span> ((token == <span class="hljs-literal">null</span>) || (<span class="hljs-keyword">typeof</span> token !== <span class="hljs-string">'string'</span>)) {
@@ -363,7 +335,7 @@ with the URL to which redirect users as second parameter.</p>
   );
 };
 
-module.exports = OAuth;</pre></div>
+<span class="hljs-built_in">module</span>.exports = OAuth;</pre></div>
         
       
       <div class="fleur">h</div>
