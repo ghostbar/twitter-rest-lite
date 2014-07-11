@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>twitter-rest-lite</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          
+          <h1 id="twitter-rest-lite">twitter-rest-lite</h1>
+
+          
+        
+
+        
+      </div>
+
+      
+        
+        <p>A lightweight Twitter REST-API library with <a href="oauth.html">OAuth</a>
+and basic <code>POST</code>/<code>GET</code> <a href="api.html">API</a> requests modules.</p>
+<p>For more convenient methods you should check <a href="https://github.com/ghostbar/twitter-rest"><code>twitter-rest</code></a>.</p>
+
+        
+          <div class='highlight'><pre>
+<span class="hljs-keyword">var</span> API = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/api'</span>);
+<span class="hljs-keyword">var</span> OAuth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/oauth'</span>);</pre></div>
+        
+      
+        
+        <h2 id="quick-usage">Quick Usage</h2>
+
+        
+      
+        
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-list'</span>),
+    twitter = <span class="hljs-keyword">new</span> TwitterLib({
+      consumer_key: <span class="hljs-string">"blahblahblah"</span>,
+      consumer_secret: <span class="hljs-string">"blahblahblah"</span>,
+      token: <span class="hljs-string">'blah'</span>,
+      token_secret: <span class="hljs-string">'blah'</span>,
+      callback: <span class="hljs-string">"randomurl"</span>
+    });
+
+twitter.api.get(<span class="hljs-string">'/statuses/user_timeline.json'</span>, {
+  screen_name: <span class="hljs-string">'twitter'</span>,
+  count: <span class="hljs-number">1</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
+  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
+
+  <span class="hljs-built_in">console</span>.log(response);
+});
+</code></pre><p>/ #### PLEASE BE WARNED</p>
+<p>Using the complete <code>require</code> is only recommended if <code>token</code> and 
+<code>token_secret</code> already exists.</p>
+<p>Otherwise the API module will throw an Error since it does need those 
+two variables to do any of the calls./</p>
+<h2 id="what-s-available-on-the-initialized-object-">What’s available on the initialized object?</h2>
+
+        
+      
+        
+        <p>Initializes two objects: <code>api</code> and <code>oauth</code>. You can initialize them
+separated too (this is my preferred method).</p>
+<h2 id="parameters-to-initialize-any-of-the-exported-objects">Parameters to initialize any of the exported Objects</h2>
+
+        
+      
+        
+        <p>All the exported functions expect an Object with the params:</p>
+<ul>
+<li><code>consumer_key</code> - (Required) consumer key given by Twitter</li>
+<li><code>consumer_secret</code> - (Required) consumer secret given by Twitter</li>
+<li><code>token</code> - (Optional) access_token key given by Twitter</li>
+<li><code>token_secret</code> - (Required if <code>access_token_key</code> was given) 
+given by Twitter</li>
+<li><code>callback</code> - (Optional) If your app is a desktop app write <code>oob</code> 
+(Out-Of-Band); if not then you should write your callback URL here 
+(which will rewrite the one configured on Twitter’s developer dashboard.</li>
+</ul>
+
+        
+      
+        
+        <p>Base URIs for Twitter API (These should be overwritten if to be used 
+with a compatible API)</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">var</span> uri = {
+  base: <span class="hljs-string">'https://api.twitter.com/1.1'</span>,
+  search: <span class="hljs-string">'https://api.twitter.com/1.1/search'</span>
+};</pre></div>
+        
+      
+        
+        <h2 id="usage">Usage</h2>
+
+        
+      
+        
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-lite'</span>),
+    keys = {consumer_key: <span class="hljs-string">'...'</span>, consumer_secret: <span class="hljs-string">'...'</span>, token: <span class="hljs-string">'...'</span>, token_secret: <span class="hljs-string">'...'</span> callback: <span class="hljs-string">'...'</span>},
+    twitter = <span class="hljs-keyword">new</span> TwitterLib(keys);
+
+<span class="hljs-comment">/* twitter.oauth object */</span>
+twitter.oauth.requestToken( <span class="hljs-comment">/* ... */</span> );
+twitter.oauth.accessToken( <span class="hljs-comment">/* ... */</span> );
+twitter.oauth.authenticate( <span class="hljs-comment">/* ... */</span> );
+twitter.oauth.authorize( <span class="hljs-comment">/* ... */</span> );
+
+<span class="hljs-comment">/* twitter.api object */</span>
+twitter.api.get( <span class="hljs-comment">/* ... */</span> );
+twitter.api.post( <span class="hljs-comment">/* ... */</span> );
+</code></pre><h4 id="please-be-warned">PLEASE BE WARNED</h4>
+<p>Using the complete <code>require</code> is only recommended if <code>token</code> and 
+<code>token_secret</code> already exists.</p>
+<p>Otherwise the API module will throw an Error since it does need those 
+two variables to do any of the calls.</p>
+<h4 id="code">Code</h4>
+
+        
+          <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> </span>{
+  <span class="hljs-keyword">return</span> {
+    API: <span class="hljs-keyword">new</span> API(uri, opts),
+    OAuth: <span class="hljs-keyword">new</span> OAuth(uri, opts)
+  }
+};</pre></div>
+        
+      
+        
+        <h2 id="oauth-quick-usage">OAuth Quick Usage</h2>
+
+        
+      
+        
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-lite'</span>),
+toauth = <span class="hljs-keyword">new</span> TwitterLib.OAuth({
+  consumer_key: <span class="hljs-string">'blah'</span>,
+  consumer_secret: <span class="hljs-string">'blah'</span>,
+  callback: <span class="hljs-string">'randomurl'</span>
+});
+
+toauth.requestToken(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
+  <span class="hljs-keyword">if</span> (err)
+    <span class="hljs-keyword">throw</span> err;
+
+  <span class="hljs-built_in">console</span>.log(response);
+});
+</code></pre><p>More on the <a href="oauth.html">OAuth module</a> documentation.</p>
+<h4 id="code">Code</h4>
+
+        
+          <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports.OAuth = <span class="hljs-built_in">module</span>.exports.oauth = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> OAuth(uri, opts);
+};</pre></div>
+        
+      
+        
+        <h2 id="api-quick-usage">API Quick Usage</h2>
+
+        
+      
+        
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-lite'</span>),
+tapi = <span class="hljs-keyword">new</span> TwitterLib.API({
+  consumer_key: <span class="hljs-string">'blah'</span>,
+  consumer_secret: <span class="hljs-string">'blah'</span>,
+  token: <span class="hljs-string">'blah'</span>,
+  token_secret: <span class="hljs-string">'blah'</span>,
+  callback: <span class="hljs-string">'randomurl'</span>
+ });
+
+ tapi.get(<span class="hljs-string">'/statuses/user_timeline.json'</span>, {
+   screen_name: <span class="hljs-string">'twitter'</span>
+ }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
+   <span class="hljs-keyword">if</span> (err)
+     <span class="hljs-keyword">throw</span> err;
+
+   <span class="hljs-built_in">console</span>.log(response);
+ });
+</code></pre><p> More on the <a href="api.html">API module</a> documentation.</p>
+<h4 id="code">Code</h4>
+
+        
+          <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports.API = <span class="hljs-built_in">module</span>.exports.api = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(opts)</span> </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> API(uri, opts);
+};</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
