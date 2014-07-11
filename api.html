@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>api.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>api.js</h1>
+        
+
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;</pre></div>
+        
+      
+        
+        <h1 id="module-api">Module: API</h1>
+
+        
+      
+        
+        <p>Abstraction for the basic <code>GET</code>/<code>POST</code> operations of Twitter’s REST API.</p>
+<h2 id="methods">Methods</h2>
+
+        
+      
+        
+        <ul>
+<li><a href="#constructor">Constructor/Initialize</a></li>
+<li><a href="#get">GET</a></li>
+<li><a href="#post">POST</a></li>
+</ul>
+<h2 id="usage">Usage</h2>
+
+        
+      
+        
+        <pre><code><span class="hljs-keyword">var</span> TwitterLib = <span class="hljs-built_in">require</span>(<span class="hljs-string">'twitter-rest-lite'</span>),
+api = <span class="hljs-keyword">new</span> TwitterLib.API(var_with_keys);
+
+api.get(url, params, callback);
+
+api.post(url, data, callback);
+</code></pre><p><a name='constructor'></a></p>
+<h2 id="constructor">Constructor</h2>
+
+        
+      
+        
+        <h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>uri</code>           - base URI’s to use (this should be provided by the
+library itself)</li>
+<li><code>opts</code>          - <code>Object</code> with user-provided params<ul>
+<li><code>consumer_key</code> - required</li>
+<li><code>consumer_secret</code> - required</li>
+<li><code>token</code> - required</li>
+<li><code>token_secret</code> - required</li>
+</ul>
+</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<p>An <code>Object</code> with methods <code>get</code> and <code>post</code>.</p>
+<h4 id="code">Code</h4>
+
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">API</span><span class="hljs-params">(uri, opts)</span> </span>{
+  <span class="hljs-keyword">this</span>.uri = uri;
+
+  <span class="hljs-comment">/* checking the required arguments */</span>
+  [<span class="hljs-string">'consumer_key'</span>, <span class="hljs-string">'consumer_secret'</span>, <span class="hljs-string">'token'</span>, <span class="hljs-string">'token_secret'</span>].forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
+    <span class="hljs-keyword">if</span> (opts[item] == <span class="hljs-literal">null</span>)
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'There\'s a required argument missing: '</span> + item);
+  });
+
+  <span class="hljs-keyword">this</span>.opts = opts;
+}</pre></div>
+        
+      
+        
+        <p><a name='get'></a></p>
+<h2 id="public-abstract-get-request-to-the-api">Public: Abstract GET request to the API</h2>
+
+        
+      
+        
+        <h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>url</code>             - String</li>
+<li><code>params</code>          - [Optional] Object with params to be passed</li>
+<li><code>callback</code>        - Callback Function</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<p>A <code>Callback</code> with two parameters. First is an <code>Error Object</code> and second
+the body of the response in an <code>Object</code>.</p>
+<h4 id="example">Example</h4>
+<pre><code class="lang-js">api.get(<span class="hljs-string">'/statuses/user_timeline.json'</span>, {
+  screen_name: <span class="hljs-string">'random'</span>,
+  count: <span class="hljs-number">1</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
+  <span class="hljs-keyword">if</span> (err)
+    <span class="hljs-keyword">throw</span> err;
+
+  <span class="hljs-built_in">console</span>.log(response);
+});
+</code></pre>
+<h4 id="code">Code</h4>
+
+        
+          <div class='highlight'><pre>API.prototype.get = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, params, callback)</span> </span>{
+  <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+  <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
+
+  url = self.uri.base + url;
+
+  <span class="hljs-keyword">if</span> ((params != <span class="hljs-literal">null</span>) &amp;&amp; (<span class="hljs-keyword">typeof</span> params === <span class="hljs-string">'object'</span>)) {
+    <span class="hljs-keyword">var</span> qs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'querystring'</span>);
+    url += <span class="hljs-string">'?'</span> + qs.stringify(params);
+  }
+
+  request({
+    method: <span class="hljs-string">'GET'</span>,
+    uri: url,
+    oauth: self.opts,
+    json: <span class="hljs-literal">true</span>,
+  }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> </span>{
+    <span class="hljs-keyword">if</span> (err)
+      <span class="hljs-keyword">return</span> callback(err);
+
+    <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, body);
+  });
+};</pre></div>
+        
+      
+        
+        <p><a name='post'></a></p>
+<h2 id="public-abstract-post-request-to-the-api">Public: abstract POST request to the API</h2>
+
+        
+      
+        
+        <h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>url</code>             - String</li>
+<li><code>data</code>            - [Required] Object with data</li>
+<li><code>callback</code>        - Callback Function</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<p>A <code>Callback</code> with two parameters: <code>Error Object</code> and <code>Object</code> with
+body response from Twitter’s API server.</p>
+<h4 id="example">Example</h4>
+<pre><code class="lang-js">api.post(<span class="hljs-string">'/statuses/update.json'</span>, {
+  status: <span class="hljs-string">"This is an update to twitter!"</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response)</span> </span>{
+  <span class="hljs-keyword">if</span> (err)
+    <span class="hljs-keyword">throw</span> err;
+
+  <span class="hljs-built_in">console</span>.log(response);
+});
+</code></pre>
+<h4 id="code">Code</h4>
+
+        
+          <div class='highlight'><pre>API.prototype.post = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, data, callback)</span> </span>{
+  <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+  <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
+  <span class="hljs-keyword">var</span> body = <span class="hljs-literal">null</span>;
+
+  url = self.uri.base + url;
+
+  <span class="hljs-keyword">if</span> (data != <span class="hljs-literal">null</span>)
+    body = <span class="hljs-built_in">JSON</span>.stringify(data);
+
+  request({
+    method: <span class="hljs-string">'POST'</span>,
+    uri: url,
+    oauth: self.opts,
+    form: data
+  }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> </span>{
+    <span class="hljs-keyword">if</span> (err)
+      <span class="hljs-keyword">return</span> callback(err);
+
+    <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, body);
+  });
+};
+
+<span class="hljs-built_in">module</span>.exports = API;</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
