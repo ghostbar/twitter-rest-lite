@@ -1,4 +1,4 @@
-twitter-rest-lite [![Build Status](https://secure.travis-ci.org/ghostbar/twitter-rest-lite.png)](http://travis.ci.org/ghostbar/twitter-rest-lite)
+twitter-rest-lite [![Build Status](https://secure.travis-ci.org/ghostbar/twitter-rest-lite.png)](http://travis-ci.org/ghostbar/twitter-rest-lite)
 =================
 
 [![NPM](https://nodei.co/npm/twitter-rest-lite.png?stars&downloads)](https://nodei.co/npm/twitter-rest-lite/)
