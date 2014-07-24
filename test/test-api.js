@@ -33,4 +33,15 @@ describe('Twitter.API Functions:', function() {
     });
   });
 
+  describe('API.proto.get()', function () {
+    it('should send an error if fails to get an URL (callback)', function (done) {
+      var api = new Twitter.API(config);
+
+      api.get([], null, function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+  });
+
 });
