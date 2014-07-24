@@ -19,5 +19,54 @@ describe('Twitter.API Functions:', function() {
 
       api.should.be.an.instanceOf(Object);
     });
+
+    it('should throw an exception on missing arguments', function () {
+      try {
+        var api = new Twitter.API({
+          'consumer_key': config.consumer_key
+        });
+      } catch (err) {
+        should.exist(err);
+        should.not.exist(api);
+      }
+    });
+  });
+
+  describe('API.proto.get()', function () {
+    var api = new Twitter.API(config);
+
+    it('should send an error if fails to get an URL (callback)', function (done) {
+      api.get([], null, function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should send an error if fails to get an URL (no-callback)', function () {
+      try {
+        api.get('');
+      } catch (err) {
+        should.exist(err);
+      }
+    });
+  });
+
+  describe('API.proto.post()', function () {
+    var api = new Twitter.API(config);
+
+    it('should send an error if fails to get an URL (callback', function (done) {
+      api.post([], null, function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should send an error if fails to get an URL (no-callback)', function () {
+      try {
+        api.post('');
+      } catch (err) {
+        should.exist(err);
+      }
+    });
   });
 });

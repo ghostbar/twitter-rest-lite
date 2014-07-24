@@ -4,7 +4,8 @@ var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var docco = require('gulp-docco');
 var subtree = require('gulp-subtree');
-var clean = require('gulp-clean');
+var rimraf = require('gulp-rimraf');
+var cover = require('gulp-coverage');
 
 var exec = require('child_process').exec;
 
@@ -36,6 +37,19 @@ gulp.task('test-net', function () {
     .pipe(mocha(opts.mocha));
 });
 
+gulp.task('coverage', function () {
+  return gulp
+    .src(['test/test-*.js'], {read: false})
+    .pipe(cover.instrument({
+      pattern: ['index.js', 'lib/**.js'],
+      debugDirectory: 'debug'
+    }))
+    .pipe(mocha(opts.mocha))
+    .pipe(cover.report({
+      outFile: 'coverage.html'
+    }));
+});
+
 gulp.task('watch', function () {
   var watcher = gulp.watch(['index.js', 'lib/**', 'test/**'], ['test']);
   watcher.on('change', function(event) {
@@ -46,7 +60,7 @@ gulp.task('watch', function () {
 gulp.task('clean-docs', function () {
   return gulp
     .src('docs/', {read: false})
-    .pipe(clean());
+    .pipe(rimraf());
 });
 
 gulp.task('make-docs', function () {
@@ -65,7 +79,7 @@ gulp.task('publish-docs', function () {
       remote: 'github',
       message: 'Updating docs'
     }))
-    .pipe(clean());
+    .pipe(rimraf());
 });
 
 gulp.task('docs', ['clean-docs', 'make-docs', 'publish-docs']);
