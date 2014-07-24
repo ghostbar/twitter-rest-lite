@@ -20,7 +20,7 @@ describe('Twitter.API Functions:', function() {
       api.should.be.an.instanceOf(Object);
     });
 
-    it('should throw an exception on missing arguments', function (done) {
+    it('should throw an exception on missing arguments', function () {
       try {
         var api = new Twitter.API({
           'consumer_key': config.consumer_key
@@ -28,7 +28,6 @@ describe('Twitter.API Functions:', function() {
       } catch (err) {
         should.exist(err);
         should.not.exist(api);
-        done();
       }
     });
   });
