@@ -5,6 +5,7 @@ var mocha = require('gulp-mocha');
 var docco = require('gulp-docco');
 var subtree = require('gulp-subtree');
 var rimraf = require('gulp-rimraf');
+var cover = require('gulp-coverage');
 
 var exec = require('child_process').exec;
 
@@ -34,6 +35,19 @@ gulp.task('test-net', function () {
   return gulp
     .src(['test/net-test-*.js'])
     .pipe(mocha(opts.mocha));
+});
+
+gulp.task('coverage', function () {
+  return gulp
+    .src(['test/test-*.js'], {read: false})
+    .pipe(cover.instrument({
+      pattern: ['index.js', 'lib/**.js'],
+      debugDirectory: 'debug'
+    }))
+    .pipe(mocha(opts.mocha))
+    .pipe(cover.report({
+      outFile: 'coverage.html'
+    }));
 });
 
 gulp.task('watch', function () {
