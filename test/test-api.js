@@ -19,5 +19,18 @@ describe('Twitter.API Functions:', function() {
 
       api.should.be.an.instanceOf(Object);
     });
+
+    it('should throw an exception on missing arguments', function (done) {
+      try {
+        var api = new Twitter.API({
+          'consumer_key': config.consumer_key
+        });
+      } catch (err) {
+        should.exist(err);
+        should.not.exist(api);
+        done();
+      }
+    });
   });
+
 });
