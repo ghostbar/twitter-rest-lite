@@ -15,6 +15,17 @@ describe('Twitter.OAuth Functions:', function () {
 
       oauth.should.be.an.instanceOf(Object);
     });
+
+    it('should throw an exception on missing params', function () {
+      try {
+        var oauth = new Twitter.OAuth({
+          'consumer_key': config.consumer_key
+        });
+      } catch (err) {
+        should.exist(err);
+        should.not.exist(oauth);
+      }
+    });
   });
 
   describe('OAuth.proto.authenticate():', function () {
