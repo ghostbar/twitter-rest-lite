@@ -39,7 +39,7 @@ gulp.task('test-net', function () {
 
 gulp.task('coverage', function () {
   return gulp
-    .src(['test/test-*.js'], {read: false})
+    .src(['test/*test-*.js'], {read: false})
     .pipe(cover.instrument({
       pattern: ['index.js', 'lib/**.js'],
       debugDirectory: 'debug'
