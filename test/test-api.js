@@ -51,4 +51,22 @@ describe('Twitter.API Functions:', function() {
     });
   });
 
+  describe('API.proto.post()', function () {
+    var api = new Twitter.API(config);
+
+    it('should send an error if fails to get an URL (callback', function (done) {
+      api.post([], null, function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should send an error if fails to get an URL (no-callback)', function () {
+      try {
+        api.post('');
+      } catch (err) {
+        should.exist(err);
+      }
+    });
+  });
 });
