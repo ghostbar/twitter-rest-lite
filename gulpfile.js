@@ -50,6 +50,19 @@ gulp.task('coverage', function () {
     }));
 });
 
+gulp.task('nonet-coverage', function () {
+  return gulp
+    .src(['test/test-*.js'], {read: false})
+    .pipe(cover.instrument({
+      pattern: ['index.js', 'lib/**.js'],
+      debugDirectory: 'debug'
+    }))
+    .pipe(mocha(opts.mocha))
+    .pipe(cover.report({
+      outFile: 'nonet-coverage.html'
+    }));
+});
+
 gulp.task('watch', function () {
   var watcher = gulp.watch(['index.js', 'lib/**', 'test/**'], ['test']);
   watcher.on('change', function(event) {
