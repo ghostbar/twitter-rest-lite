@@ -40,6 +40,29 @@ describe('Helper functions', function () {
         should.exist(err);
       }
     });
+
+    it('should throw an error if errMsg is empty', function (done) {
+      h.check(null, 'string', '', '', function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should pass clean if obj exists', function () {
+      try {
+        h.check('test', 'string', '', 'Dont send error');
+      } catch (err) {
+        should.not.exist(err);
+      }
+    });
+
+    it('should evaluate even if empty is not defined', function () {
+      try {
+        h.check('test', 'string', null, 'Dont send error');
+      } catch (err) {
+        should.not.exist(err);
+      }
+    });
   });
 
 });
