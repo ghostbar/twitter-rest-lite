@@ -68,5 +68,21 @@ describe('Twitter.API Functions:', function() {
         should.exist(err);
       }
     });
+
+    it('should send an error if fails to get data (callback)', function (done) {
+      api.post('url.json', null, function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should send an error if fails to get data (no-callback)', function () {
+      try {
+        api.post('url.json');
+      } catch (err) {
+        should.exist(err);
+      }
+    });
+
   });
 });
