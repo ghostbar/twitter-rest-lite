@@ -1,3 +1,4 @@
+'use strict';
 // twitter-rest-lite
 // =================
 //
@@ -104,7 +105,7 @@ module.exports = function(opts) {
   return {
     API: new API(uri, opts),
     OAuth: new OAuth(uri, opts)
-  }
+  };
 };
 
 // OAuth Quick Usage

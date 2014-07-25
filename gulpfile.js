@@ -38,16 +38,16 @@ gulp.task('test-net', function () {
 });
 
 function coverage (tests, output) {
-   return gulp
-    .src(tests, {read: false})
-    .pipe(cover.instrument({
-      pattern: ['index.js', 'lib/**.js'],
-      debugDirectory: 'debug'
-    }))
-    .pipe(mocha(opts.mocha))
-    .pipe(cover.report({
-      outFile: output
-    }));
+  return gulp
+  .src(tests, {read: false})
+  .pipe(cover.instrument({
+    pattern: ['index.js', 'lib/**.js'],
+    debugDirectory: 'debug'
+  }))
+  .pipe(mocha(opts.mocha))
+  .pipe(cover.report({
+    outFile: output
+  }));
 }
 
 gulp.task('coverage', function () {
