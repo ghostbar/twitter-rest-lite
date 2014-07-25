@@ -37,36 +37,31 @@ gulp.task('test-net', function () {
     .pipe(mocha(opts.mocha));
 });
 
-gulp.task('coverage', function () {
-  return gulp
-    .src(['test/*test-*.js'], {read: false})
+function coverage (tests, output) {
+   return gulp
+    .src(tests, {read: false})
     .pipe(cover.instrument({
       pattern: ['index.js', 'lib/**.js'],
       debugDirectory: 'debug'
     }))
     .pipe(mocha(opts.mocha))
     .pipe(cover.report({
-      outFile: 'coverage.html'
+      outFile: output
     }));
+}
+
+gulp.task('coverage', function () {
+  return coverage(['test/*test-*.js'], 'coverage.html');
 });
 
 gulp.task('nonet-coverage', function () {
-  return gulp
-    .src(['test/test-*.js'], {read: false})
-    .pipe(cover.instrument({
-      pattern: ['index.js', 'lib/**.js'],
-      debugDirectory: 'debug'
-    }))
-    .pipe(mocha(opts.mocha))
-    .pipe(cover.report({
-      outFile: 'nonet-coverage.html'
-    }));
+  return coverage(['test/test-*.js'], 'nonet-coverage.html');
 });
 
 gulp.task('watch', function () {
   var watcher = gulp.watch(['index.js', 'lib/**', 'test/**'], ['test']);
   watcher.on('change', function(event) {
-      console.log('File '+event.path+' was '+event.type+', running tasks...');
+    console.log('File '+event.path+' was '+event.type+', running tasks...');
   });
 });
 
