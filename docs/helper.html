@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>helper.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>helper.js</h1>
+        
+
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;
+
+<span class="hljs-keyword">var</span> callError = <span class="hljs-built_in">module</span>.exports.callError = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callError</span> <span class="hljs-params">(errMsg, cb)</span> </span>{
+  <span class="hljs-keyword">if</span> (cb != <span class="hljs-literal">null</span>)
+    <span class="hljs-keyword">return</span> cb(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(errMsg));
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(errMsg);
+};
+
+<span class="hljs-keyword">var</span> check = <span class="hljs-built_in">module</span>.exports.check = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">check</span> <span class="hljs-params">(obj, type, empty, errMsg, cb)</span> </span>{
+  <span class="hljs-keyword">if</span> (errMsg == <span class="hljs-literal">null</span> || <span class="hljs-keyword">typeof</span> errMsg !== <span class="hljs-string">'string'</span> || errMsg === <span class="hljs-string">''</span>) {
+    callError(<span class="hljs-string">'errMsg needs to be defined'</span>, cb);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }
+
+  <span class="hljs-keyword">if</span> (obj == <span class="hljs-literal">null</span> || <span class="hljs-keyword">typeof</span>(obj) !== type) {
+    callError(errMsg, cb);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }
+
+  <span class="hljs-keyword">if</span> (empty != <span class="hljs-literal">null</span> &amp;&amp; obj === empty) {
+    callError(errMsg, cb);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }
+};
+
+<span class="hljs-built_in">module</span>.exports.authyThing = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">authyThing</span> <span class="hljs-params">(what, token, cb)</span> </span>{
+  <span class="hljs-keyword">if</span> (!check(token, <span class="hljs-string">'string'</span>, <span class="hljs-string">''</span>, <span class="hljs-string">'Requires a token'</span>, cb))
+    <span class="hljs-keyword">return</span> cb(<span class="hljs-literal">null</span>, <span class="hljs-keyword">this</span>.uri[what] + <span class="hljs-string">'?oauth_token='</span> + token);
+};</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
