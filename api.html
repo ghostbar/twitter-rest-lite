@@ -128,16 +128,9 @@ the body of the response in an <code>Object</code>.</p>
           <div class='highlight'><pre>API.prototype.get = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, params, callback)</span> </span>{
   <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
   <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
+  <span class="hljs-keyword">var</span> helper = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./helper'</span>);
 
-  <span class="hljs-keyword">if</span> (url == <span class="hljs-literal">null</span> || url === <span class="hljs-string">''</span> || <span class="hljs-keyword">typeof</span>(url) !== <span class="hljs-string">'string'</span>) {
-    <span class="hljs-keyword">if</span> (callback != <span class="hljs-literal">null</span>) {
-      <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(
-        <span class="hljs-string">'Missing URL parameter'</span>
-      ));
-    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Missing URL parameter'</span>);
-    }
-  }
+  helper.check(url, <span class="hljs-string">'string'</span>, <span class="hljs-string">''</span>, <span class="hljs-string">'Missing URL parameter'</span>, callback);
 
   url = self.uri.base + url;
 
@@ -152,10 +145,7 @@ the body of the response in an <code>Object</code>.</p>
     oauth: self.opts,
     json: <span class="hljs-literal">true</span>,
   }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> </span>{
-    <span class="hljs-keyword">if</span> (err)
-      <span class="hljs-keyword">return</span> callback(err);
-
-    <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, body);
+    <span class="hljs-keyword">return</span> callback(err, body);
   });
 };</pre></div>
         
@@ -192,35 +182,24 @@ body response from Twitter’s API server.</p>
           <div class='highlight'><pre>API.prototype.post = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, data, callback)</span> </span>{
   <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
   <span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
-  <span class="hljs-keyword">var</span> body = <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">var</span> helper = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./helper'</span>);
 
-  <span class="hljs-keyword">if</span> (url == <span class="hljs-literal">null</span> || url === <span class="hljs-string">''</span> || <span class="hljs-keyword">typeof</span>(url) !== <span class="hljs-string">'string'</span>) {
-    <span class="hljs-keyword">if</span> (callback != <span class="hljs-literal">null</span>) {
-      <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(
-        <span class="hljs-string">'Missing URL parameter'</span>
-      ));
-    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Missing URL parameter'</span>);
-    }
-  }
+  <span class="hljs-keyword">if</span> (helper.check(url, <span class="hljs-string">'string'</span>, <span class="hljs-string">''</span>, <span class="hljs-string">'Missing URL parameter'</span>, callback))
+    <span class="hljs-keyword">return</span>;
 
-  url = self.uri.base + url;
-
-  <span class="hljs-keyword">if</span> (data != <span class="hljs-literal">null</span>)
-    body = <span class="hljs-built_in">JSON</span>.stringify(data);
+  <span class="hljs-keyword">if</span> (helper.check(data, <span class="hljs-string">'object'</span>, {}, <span class="hljs-string">'Missing data parameter'</span>, callback))
+    <span class="hljs-keyword">return</span>;
 
   request({
     method: <span class="hljs-string">'POST'</span>,
-    uri: url,
+    uri: self.uri.base +  url,
     oauth: self.opts,
     form: data
   }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, response, body)</span> </span>{
-    <span class="hljs-keyword">if</span> (err)
-      <span class="hljs-keyword">return</span> callback(err);
-
-    <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, body);
+    <span class="hljs-keyword">return</span> callback(err, body);
   });
 };
+
 
 <span class="hljs-built_in">module</span>.exports = API;</pre></div>
         
