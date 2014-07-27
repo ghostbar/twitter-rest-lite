@@ -72,6 +72,31 @@ describe('Helper functions', function () {
         should.not.exist(err);
       }
     });
+
+  });
+
+  describe('authyThing', function () {
+    it('should exist and be a function', function () {
+      should.exist(h.authyThing);
+      (typeof(h.authyThing)).should.equal('function');
+    });
+
+    it('should print a token url', function (done) {
+      var a = {
+        uri: {
+          anything: 'random'
+        }
+      };
+
+      h.authyThing.call(a, 'anything', 'token', function (err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.should.equal('random?oauth_token=token');
+
+        done();
+      });
+    });
   });
 
 });
