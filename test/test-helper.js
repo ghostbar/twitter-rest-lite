@@ -6,6 +6,15 @@ var should = require('should');
 describe('Helper functions', function () {
   var h = require('../lib/helper');
 
+  describe('loading via index file', function () {
+    var a = require('../index').helper;
+
+    it('should exist the functions', function () {
+      should.exist(a);
+      (typeof(a.callError)).should.equal('function');
+    });
+  });
+
   describe('callError():', function () {
     it('should exist and be a function', function () {
       should.exist(h.callError);
