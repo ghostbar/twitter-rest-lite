@@ -1,6 +1,6 @@
 {
   "name": "twitter-rest-lite",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Twitter's REST API Lite",
   "main": "index.js",
   "scripts": {
