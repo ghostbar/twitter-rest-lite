@@ -86,8 +86,7 @@ gulp.task('publish-docs', function () {
     .pipe(subtree({
       remote: 'github',
       message: 'Updating docs'
-    }))
-    .pipe(rimraf());
+    }));
 });
 
 gulp.task('docs', ['clean-docs', 'make-docs', 'publish-docs']);
