@@ -163,3 +163,5 @@ module.exports.OAuth = module.exports.oauth = function(opts) {
 module.exports.API = module.exports.api = function(opts) {
   return new API(uri, opts);
 };
+
+module.exports.helper = require('./lib/helper');
