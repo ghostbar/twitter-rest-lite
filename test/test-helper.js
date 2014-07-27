@@ -57,6 +57,14 @@ describe('Helper functions', function () {
       });
     });
 
+    it('on errors it should return true', function (done) {
+      function cb (err) {
+        should.exist(err);
+      }
+      if (h.check('', 'string', '', 'Send error', cb))
+        done();
+    });
+
     it('should pass clean if obj exists', function () {
       try {
         h.check('test', 'string', '', 'Dont send error');
