@@ -1,4 +1,4 @@
-twitter-rest-lite [![Build Status](https://secure.travis-ci.org/ghostbar/twitter-rest-lite.png)](http://travis-ci.org/ghostbar/twitter-rest-lite)
+twitter-rest-lite [![Build Status](https://secure.travis-ci.org/ghostbar/twitter-rest-lite.png)](http://travis-ci.org/ghostbar/twitter-rest-lite) [![Code Climate](https://codeclimate.com/github/ghostbar/twitter-rest-lite/badges/gpa.svg)](https://codeclimate.com/github/ghostbar/twitter-rest-lite)
 =================
 
 A lite Twitter's API library for Node.js. It has two interfaces: a simple API interface for interacting via `GET` and `POST` requests with Twitter's API and an OAuth interface that takes care of authentication related stuff with Twitter's API.
