@@ -71,7 +71,7 @@ gulp.task('clean-docs', function () {
     .pipe(rimraf());
 });
 
-gulp.task('make-docs', function () {
+gulp.task('make-docs', ['clean-docs'], function () {
   return gulp
     .src(['index.js', 'lib/*.js'])
     .pipe(docco({
@@ -80,7 +80,7 @@ gulp.task('make-docs', function () {
     .pipe(gulp.dest('./docs'));
 });
 
-gulp.task('publish-docs', function () {
+gulp.task('publish-docs', ['make-docs'], function () {
   return gulp
     .src('docs')
     .pipe(subtree({
